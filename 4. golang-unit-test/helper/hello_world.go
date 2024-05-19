@@ -1,5 +1,9 @@
 package helper
 
+import "fmt"
+
 func HelloWorld(name string) string {
-  return "Hello " + name
+
+	fmt.Println("test executed!")
+	return "Hello " + name
 }
