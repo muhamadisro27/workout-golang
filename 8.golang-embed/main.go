@@ -1,0 +1,39 @@
+package main
+
+import (
+	"embed"
+	"fmt"
+	"io/fs"
+	"os"
+)
+
+//go:embed version.txt
+var version string
+
+//go:embed ss.png
+var logo []byte
+
+//go:embed files/*.txt
+var path embed.FS
+
+func main() {
+
+	fmt.Println(version)
+
+	err := os.WriteFile("logo_new.png", logo, fs.ModePerm)
+	if err != nil {
+		panic(err)
+	}
+
+	dir, _ := os.ReadDir("files")
+
+	for _, entry := range dir {
+		if !entry.IsDir() {
+			file, err := path.ReadFile("files/" + entry.Name())
+			if err != nil {
+				panic(err)
+			}
+			fmt.Println(string(file))
+		}
+	}
+}
