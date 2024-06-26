@@ -1,0 +1,23 @@
+{
+    "first_name": "Muhamad",
+    "last_name": "Isro Sabanur",
+    "age": 23,
+    "is_married": false,
+    "hobbies": [
+        "Coding",
+        "Gaming",
+        "Guitar"
+    ],
+    "addresses": [
+        {
+            "street": "Jalan Kusuma",
+            "country": "Indonesia",
+            "postal_code": "76142"
+        },
+        {
+            "street": "Jalan Unocal",
+            "country": "Indonesia",
+            "postal_code": "76141"
+        }
+    ]
+}
