@@ -5,12 +5,15 @@ import (
 	"golang-restful-api/app/database"
 	"golang-restful-api/controller"
 	"golang-restful-api/helper"
+	"golang-restful-api/middleware"
 	"golang-restful-api/repository"
+	"golang-restful-api/router"
 	"golang-restful-api/service"
 	"net/http"
 
+	_ "github.com/go-sql-driver/mysql"
+
 	"github.com/go-playground/validator/v10"
-	"github.com/julienschmidt/httprouter"
 )
 
 func main() {
@@ -24,17 +27,13 @@ func main() {
 	categoryService := service.NewCategoryService(categoryRepository, db, validate)
 	categoryController := controller.NewCategoryController(categoryService)
 
-	r := httprouter.New()
+	r := router.NewRouter(categoryController)
 
-	r.GET("/api/categories", categoryController.FindAll)
-	r.POST("/api/categories", categoryController.Insert)
-	r.GET("/api/categories/:categoryId", categoryController.FindById)
-	r.PUT("/api/categories/:categoryId", categoryController.Update)
-	r.DELETE("/api/categories/:categoryId", categoryController.Delete)
+	authMiddleware := middleware.NewAuthMiddleware(r)
 
 	server := http.Server{
 		Addr:    "localhost:4000",
-		Handler: r,
+		Handler: authMiddleware,
 	}
 
 	err := server.ListenAndServe()

@@ -4,7 +4,6 @@ import (
 	"database/sql"
 	"fmt"
 	"golang-restful-api/helper"
-	_ "github.com/go-sql-driver/mysql"
 	"time"
 )
 
