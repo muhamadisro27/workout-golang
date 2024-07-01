@@ -1,0 +1,8 @@
+app:
+  name: "belajar-golang-viper"
+  author: "Muhamad Isro Sabanur"
+  version: "1.0.0"
+database:
+  show_sql: true
+  host: "localhost"
+  port: 3306
